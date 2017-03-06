@@ -6,7 +6,7 @@
 # PARAMETERS
 INSTALL_PATH=${INSTALL_PATH:-/opt/atlassian/jira}
 # The default DATA_PATH is /var/atlassian/application-data/jira
-DATA_PATH=${DATA_PATH:-/data/jira}
+DATA_PATH=${DATA_PATH:-/var/atlassian/jira}
 ME=`basename "$0"`
 
 # This script will
