@@ -1,6 +1,6 @@
 # JIRA ServiceDesk
 
-This docker image deploys a JIRA Service Desk instance.
+This docker image deploys a JIRA ServiceDesk instance.
 
 ## Ports
 
@@ -12,7 +12,7 @@ Are exposed, ports `8080` and `8005`
 
 JIRA is installed, inside the container, in it's default location: `/opt/atlassian/jira`. Mouting a volume here will allow you to tweak the installation.
 
-Attention, JIRA Service Desk is not installed during this image build. JIRA's installation will only happen if
+Attention, JIRA ServiceDesk is not installed during this image build. JIRA's installation will only happen if
 the `entrypoint` script finds the install folder empty. This allows you to mount a volume at the install folder.
 
 The installation path can be changed using `ENV` variable.
