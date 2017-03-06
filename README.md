@@ -19,17 +19,17 @@ The installation path can be changed using `ENV` variable.
 
 ### Data folder
 
-Data are stored in `/data/jira` instead of the default `/var/atlassian/application-data/jira`. There is no valid explanation to this. I'm just lazy and I don't want to type long path when I mount the docker image's volumes.
+Data are stored in `/var/atlassian/jira` instead of the default `/var/atlassian/application-data/jira`. There is no valid explanation to this. I'm just lazy and I don't want to type long path when I mount the docker image's volumes.
 
 The data path can be changed using `ENV` variables
 
 ## Environment variables
 
 * `INSTALL_PATH`, default value is `/opt/atlassian/jira`, will be where the application is installed
-* `DATA_PATH`, default value is `/data/jira`, will be where the datas will be stored
+* `DATA_PATH`, default value is `/var/atlassian/jira`, will be where the datas will be stored
 
 ## Start the container
 
 ```
-docker run -d -v your/install/path:/opt/atlassian/jira -v your/data/path:/data/jira -p 8080:8080 notuscloud/jira-servicedesk
+docker run -d -v your/install/path:/opt/atlassian/jira -v your/data/path:/var/atlassian/jira -p 8080:8080 notuscloud/jira-servicedesk
 ```
