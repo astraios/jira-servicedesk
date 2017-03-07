@@ -1,5 +1,8 @@
 FROM centos:7.3.1611
 
+ENV INSTALL_PATH=/opt/atlassian/jira
+ENV DATA_PATH=/var/atlassian/jira
+
 # Fetch Install binary
 RUN yum install -y wget bzip2 rsync
 RUN mkdir /install

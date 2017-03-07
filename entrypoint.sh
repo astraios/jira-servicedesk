@@ -21,14 +21,26 @@ then
   echo "Jira is not installed..."
   cd /install
   tar xvf install.tar.bz2
-  tar xvf data.tar.bz2
-  rsync -aHv --progress tmpinstall/ ${INSTALL_PATH}/
-  rsync -aHv --progressv tmpdata/ ${DATA_PATH}/
-  chown -Rv jira: ${DATA_PATH}
-  rm -rf tmpinstall
-  rm -rf tmpdata
+  rsync -aH jira/ ${INSTALL_PATH}/
+  rm -rf jira
+  chown jira:jira -R ${INSTALL_PATH}
   cd -
+else
+  echo "Install detected, $(ls ${INSTALL_PATH} | wc -l) files..."
 fi
+if [ $(ls ${DATA_PATH} | wc -l) == "0" ]; 
+then
+  echo "The data directory is empty"
+  cd /install
+  tar xvf data.tar.bz2
+  rsync -aH jira/ ${DATA_PATH}/
+  rm -rf jira
+  chown jira:jira -R ${DATA_PATH}
+  cd -
+else
+  echo "Install detected, $(ls ${INSTALL_PATH} | wc -l) files..."
+fi
+
 
 # Start JIRA
 ${INSTALL_PATH}/bin/start-jira.sh -fg

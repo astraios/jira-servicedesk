@@ -33,3 +33,7 @@ The data path can be changed using `ENV` variables
 ```
 docker run -d -v your/install/path:/opt/atlassian/jira -v your/data/path:/var/atlassian/jira -p 8080:8080 notuscloud/jira-servicedesk
 ```
+
+## TODO
+
+This a first draft of the container, I got to find a clean way to make this docker image lighter
