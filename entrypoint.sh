@@ -4,10 +4,10 @@
 # Docker image entrypoint
 
 # PARAMETERS
-INSTALL_PATH=${INSTALL_PATH:-/opt/atlassian/jira}
-# The default DATA_PATH is /var/atlassian/application-data/jira
-DATA_PATH=${DATA_PATH:-/var/atlassian/jira}
-ME=`basename "$0"`
+export INSTALL_PATH=${INSTALL_PATH:-/opt/atlassian/jira}
+export DATA_PATH=${DATA_PATH:-/var/atlassian/jira} # The default DATA_PATH is /var/atlassian/application-data/jira
+export JRE_HOME=${INSTALL_PATH}/jre
+export JIRA_HOME=${DATA_PATH}
 
 # This script will
 # 1 - Install JIRA Service Desk in its install path if no installation is detected
@@ -19,16 +19,15 @@ ME=`basename "$0"`
 if [ $(ls ${INSTALL_PATH} | wc -l) == "0" ]; 
 then
   echo "Jira is not installed..."
-  cat << EOF | sh /install/atlassian-servicedesk-3.3.2-x64.bin
-o
-2
-${INSTALL_PATH}
-${DATA_PATH}
-1
-n
-i
-n
-EOF
+  cd /install
+  tar xvf install.tar.bz2
+  tar xvf data.tar.bz2
+  rsync -aHv --progress tmpinstall/ ${INSTALL_PATH}/
+  rsync -aHv --progressv tmpdata/ ${DATA_PATH}/
+  chown -Rv jira: ${DATA_PATH}
+  rm -rf tmpinstall
+  rm -rf tmpdata
+  cd -
 fi
 
 # Start JIRA
